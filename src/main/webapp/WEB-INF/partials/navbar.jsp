@@ -4,6 +4,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+            <a class="navbar-brand" href="/index.jsp">Home</a>
             <a class="navbar-brand" href="/ads">Adlister</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
@@ -15,6 +16,7 @@
             </c:if>
             <c:if test="${sessionScope.user != null}">
                 <!-- Display logout link -->
+                <li><a href="/profile">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
             </c:if>
         </ul>

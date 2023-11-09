@@ -111,7 +111,8 @@
         <p>Username: ${sessionScope.user.username}</p>
         <p>Email: ${sessionScope.user.email}</p>
     </div>
-
+<%--    edit profile--%>
+    <button><a href="/editprofile">Edit Profile</a></button>
 
 </div>
 
