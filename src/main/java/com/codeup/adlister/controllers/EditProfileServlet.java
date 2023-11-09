@@ -47,7 +47,7 @@ public class EditProfileServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-//        DaoFactory.getUsersDao().update();
+        DaoFactory.getUsersDao().update();
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/profile.jsp");
         dispatcher.forward(request, response);
 
