@@ -111,7 +111,19 @@
         <p>Username: ${sessionScope.user.username}</p>
         <p>Email: ${sessionScope.user.email}</p>
     </div>
-
+    <div class="edit-delete-buttons">
+        <!-- Edit button -->
+                <h4>Click to Edit Account</h4>
+                <form method="get" action="/edituser" class="editForm">
+                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
+                    <input type="submit" class="Btn" value="Edit">
+                </form>
+        <!-- Delete button -->
+        <h4>Click to Delete Account</h4>
+        <form method="get" action="/deleteuser" class="editForm">
+            <input type="hidden" name="userId" value="${sessionScope.user.id}">
+            <input type="submit" class="Btn" value="Delete">
+        </form>
 
 </div>
 
