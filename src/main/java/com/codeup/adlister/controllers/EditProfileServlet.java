@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Config;
 
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,8 @@ public class EditProfileServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        User user = (User) request.getSession().getAttribute("user");
+        long userId = user.getId();
 
         Config config = new Config();
         try {
@@ -37,14 +40,14 @@ public class EditProfileServlet extends HttpServlet {
             statement.setString(1, username);
             statement.setString(2, email);
             statement.setString(3, password);
-            statement.setInt(4, Integer.parseInt(request.getSession().getAttribute("user_id").toString()));
+            statement.setLong(4, userId);
             statement.executeUpdate();
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        DaoFactory.getUsersDao().update();
+//        DaoFactory.getUsersDao().update();
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/profile.jsp");
         dispatcher.forward(request, response);
 

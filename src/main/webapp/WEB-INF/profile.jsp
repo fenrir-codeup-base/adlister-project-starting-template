@@ -114,7 +114,7 @@
     <div class="edit-delete-buttons">
         <!-- Edit button -->
                 <h4>Click to Edit Account</h4>
-                <form method="get" action="/edituser" class="editForm">
+                <form method="get" action="/editprofile" class="editForm">
                     <input type="hidden" name="userId" value="${sessionScope.user.id}">
                     <input type="submit" class="Btn" value="Edit">
                 </form>
