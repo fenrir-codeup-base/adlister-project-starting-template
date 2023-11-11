@@ -21,6 +21,9 @@ public class User {
         this.password = password;
     }
 
+    public static void update(User updatedUser) {
+    }
+
     public long getId() {
         return id;
     }

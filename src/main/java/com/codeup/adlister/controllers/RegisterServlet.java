@@ -55,6 +55,7 @@ public class RegisterServlet extends HttpServlet {
         // Hash the password
         String hash = Password.hash(user.getPassword());
         user.setPassword(hash);
+
         //Inserts the user into the database using the DaoFactory and redirects to login
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");
