@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,11 @@ public class ListAdsDao implements Ads {
 
     @Override
     public List<Ad> search(String query) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> getUserAds(User user) {
         return null;
     }
 

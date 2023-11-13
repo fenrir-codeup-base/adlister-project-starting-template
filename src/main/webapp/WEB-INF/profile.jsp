@@ -155,7 +155,7 @@
 
         <!-- Delete button -->
         <h4>Click to Delete Account</h4>
-        <form method="get" action="/deleteuser" class="editForm">
+        <form method="post" action="/deleteuser" class="editForm">
             <input type="hidden" name="userId" value="${sessionScope.user.id}">
             <input type="submit" class="Btn" value="Delete">
         </form>

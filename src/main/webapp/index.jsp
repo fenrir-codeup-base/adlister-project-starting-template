@@ -12,6 +12,7 @@
     }
 
     html {
+        /*color: whitesmoke;*/
         /*background-colo: #B2B6BB;*/
         /*z-index: 0;*/
         /*background: linear-gradient(300deg, #f1f1f6, #aaaaad, #ffffff);*/
@@ -22,15 +23,14 @@
     }
     /*//Animated video*/
 
-    /*.back-video {*/
-    /*    position: absolute;*/
-    /*    !*right: 0;*!*/
-    /*    !*bottom: 0;*!*/
-    /*    z-index: 1;*/
-    /*}*/
+    .back-video {
+        position: absolute;
+        right: 0;
+        /*bottom: 0px;*/
+        z-index: 1;
+    }
 
     .container {
-
         /*background video*/
         /*background: linear-gradient(300deg, #f1f1f6, #aaaaad, #ffffff);*/
         /*background-size: contain;*/
@@ -52,14 +52,14 @@
     }
 
     h1, h3 {
-        color: #3279B7;
-        margin: 0;
-        padding: 20px;
+        color: whitesmoke;
+        margin: 10px;
+        padding: 10px;
         text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
         z-index: 2;
     }
     h1 {
-        font-size: 75px;
+        font-size: 90px;
     }
     h3 {
         font-size: 40px;
@@ -71,13 +71,13 @@
 </style>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-<%--<video autoplay loop muted playsinline class="back-video">--%>
-<%--    <source src="media/pexels_videos_1970039%20(1080p).mp4" type="video/mp4">--%>
-<%--</video>--%>
+<video autoplay loop muted playsinline class="back-video">
+    <source src="media/pexels_videos_1970039%20(1080p).mp4" type="video/mp4">
+</video>
 <div class="container">
     <h1>Welcome to the Art-Lister!</h1>
-    <h3><a href="/register">Click here to become a Member!</a></h3>
-    <h3><a href="/login">Click here to Login</a></h3>
+<%--    <h3><a href="/register">Click here to become a Member!</a></h3>--%>
+<%--    <h3><a href="/login">Click here to Login</a></h3>--%>
 </div>
 </body>
 </html>
