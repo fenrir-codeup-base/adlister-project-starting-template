@@ -1,6 +1,8 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.dao.MySQLAdsDao;
+import com.codeup.adlister.models.Ad;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,7 @@ public class DeleteAdServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/ads/deletead.jsp").forward(request, response);
     }
 
-    @Override
+        @Override
     protected void  doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idParameter = request.getParameter("id");
         if (idParameter != null && !idParameter.isEmpty()) {
@@ -25,4 +27,5 @@ public class DeleteAdServlet extends HttpServlet {
         }
         response.sendRedirect("/profile");
     }
+
 }
