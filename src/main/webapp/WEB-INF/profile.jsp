@@ -126,13 +126,18 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="ad" items="${ads}">
                 <tr>
+<%--                    href link that supposedly takes you to the nonexistent details page of the ad--%>
                     <td><a href="/ads/detail?id=${ad.id}">${ad.title}</a></td>
                     <td>${ad.description}</td>
+                    <td><a href="/WEB-INF/ads/edit.jsp">Edit</a></td>
+                    <td><a href="/WEB-INF/ads/deletead.jsp">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
