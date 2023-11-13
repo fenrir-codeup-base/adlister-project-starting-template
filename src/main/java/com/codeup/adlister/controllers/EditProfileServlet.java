@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Config;
+import com.codeup.adlister.util.Password;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,38 +19,50 @@ import java.sql.SQLException;
 
 @WebServlet(name = "EditProfileServlet", urlPatterns = "/editprofile")
 public class EditProfileServlet extends HttpServlet {
+    @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.getRequestDispatcher("/WEB-INF/editprofile.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/users/EditProfile.jsp").forward(request, response);
     }
+
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        User loggedInUser = (User) request.getSession().getAttribute("user");
+
+        // Retrieve the updated user details from the request parameters
+        long userId = loggedInUser.getId();
+
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        User user = (User) request.getSession().getAttribute("user");
-        long userId = user.getId();
+        String passwordConfirmation = request.getParameter("confirm_password");
 
-        Config config = new Config();
-        try {
-            Connection connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
-            );
-            String sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, email);
-            statement.setString(3, password);
-            statement.setLong(4, userId);
-            statement.executeUpdate();
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        //Verifies if input has errors and confirms double checks password
+        boolean HasErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (! password.equals(passwordConfirmation));
+        if (HasErrors) {
+            request.getRequestDispatcher("/WEB-INF/user/EditProfile.jsp").forward(request, response);
+            return;
+
         }
 
-        DaoFactory.getUsersDao().update();
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/profile.jsp");
-        dispatcher.forward(request, response);
+        //Update user
+        DaoFactory.getUsersDao().update(new User(loggedInUser.getId(), username, email, Password.hash(password)));
+        response.sendRedirect("/profile");
+
+        //Create a User object with the updated values
+        User updatedUser = new User(userId, username, email, password);
+
+        //Call the update method to update the user in the database
+        User.update(updatedUser);
+        Object user = DaoFactory.getUsersDao().findByUsername(username);
+        DaoFactory.getUsersDao().edit(user);
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", user);
+        response.sendRedirect("/profile");
+
 
     }
 }

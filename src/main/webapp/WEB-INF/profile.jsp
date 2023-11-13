@@ -77,6 +77,39 @@
         .user-info p {
             margin: 5px;
         }
+        .edit-delete-buttons {
+            margin-top: 20px;
+            display: table;
+            margin: 0 auto;
+        }
+
+        .edit-delete-buttons form {
+            display: table-cell;
+            padding: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .edit-delete-buttons h4 {
+            margin-top: 14px;
+            padding-bottom: 10px;
+        }
+
+        .edit-delete-buttons input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .edit-delete-buttons .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .edit-delete-buttons .form-container h4,
+        .edit-delete-buttons .form-container input[type="submit"] {
+            margin: 5px 0;
+        }
 
     </style>
 </head>
@@ -112,15 +145,17 @@
         <p>Email: ${sessionScope.user.email}</p>
     </div>
     <div class="edit-delete-buttons">
+
         <!-- Edit button -->
                 <h4>Click to Edit Account</h4>
                 <form method="get" action="/editprofile" class="editForm">
                     <input type="hidden" name="userId" value="${sessionScope.user.id}">
                     <input type="submit" class="Btn" value="Edit">
                 </form>
+
         <!-- Delete button -->
         <h4>Click to Delete Account</h4>
-        <form method="get" action="/deleteuser" class="editForm">
+        <form method="post" action="/deleteuser" class="editForm">
             <input type="hidden" name="userId" value="${sessionScope.user.id}">
             <input type="submit" class="Btn" value="Delete">
         </form>
