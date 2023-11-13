@@ -1,10 +1,14 @@
 package com.codeup.adlister.models;
 
+import java.util.ArrayList;
+
 public class User {
     private long id;
     private String username;
     private String email;
     private String password;
+
+    private ArrayList<Ad> ads;
 
     public User() {}
 
@@ -12,6 +16,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String email, String password, ArrayList<Ad> ads) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.ads = ads;
     }
 
     public User(long id, String username, String email, String password) {

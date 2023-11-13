@@ -1,11 +1,10 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Config;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -55,12 +54,67 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public void update(Ad ad) {
+
+    }
+
+    @Override
+    public void delete(long id) {
+
+    }
+
+    @Override
+    public Ad findById(long id) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> findByUserId(long userId) {
+
+
+        return null;
+    }
+
+    @Override
+    public List<Ad> search(String query) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> getUserAds(User user) {
+        String query = "Select * from ads where user_id = ?";
+//        return null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, user.getId());
+            ResultSet resultSet = stmt.executeQuery();
+            return createAdsFromResults(resultSet);
+        } catch (SQLException e ) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
+
+    private User extractUser(ResultSet rs) throws SQLException {
+        if (! rs.next()) {
+            return null;
+        }
+        return new User(
+                rs.getLong("id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password")
+        );
+    }
+
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description")
         );
     }
 
