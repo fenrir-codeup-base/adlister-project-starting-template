@@ -160,6 +160,8 @@
             <input type="submit" class="Btn" value="Delete">
         </form>
 
+<%--        ad cards--%>
+
 </div>
 
 </body>
