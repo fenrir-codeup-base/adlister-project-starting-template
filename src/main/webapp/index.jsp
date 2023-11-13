@@ -7,11 +7,11 @@
     </jsp:include>
 </head>
 <style>
-
-    * {
-        box-sizing: border-box;
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
     }
-
     video {
         object-fit: cover;
         position: absolute;
@@ -19,43 +19,23 @@
         left: 0;
         height: 100%;
         width: 100%;
-
     }
 
     .video-wrapper {
         width: 100%;
         height: 100vh;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
         overflow: hidden;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    ul.nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        z-index: 2;
-        list-style: none;
-        text-align: right;
-    }
 
-    ul.nav li {
-        display: inline;
-        margin-right: 20px;
-    }
-
-    ul.nav a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-    }
-
-    .header{
+    .container.hero h1 {
         font-size: 18px;
         font-weight: 400;
         position: relative;
@@ -81,13 +61,20 @@
     }
 </style>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-<div class="video-wrapper">
-    <video autoplay loop muted playsinline class="back-video">
-        <source src="media/pexels_videos_1970039%20(1080p).mp4" type="video/mp4">
-    </video>
-    <div class="header">
-        <h1>Welcome to the Art-Lister!</h1>
+
+<div class="page-wrapper position-relative">
+    <div class="video-wrapper">
+        <video autoplay loop muted playsinline class="back-video">
+            <source src="media/pexels_videos_1970039%20(1080p).mp4" type="video/mp4">
+        </video>
+    </div>
+    <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
+    <div class="container flex-grow-1 d-flex flex-column justify-content-center hero">
+        <div class="row">
+            <div class="col d-flex flex-column align-items-center">
+                <h1>Welcome to the Adlister</h1>
+            </div>
+        </div>
     </div>
 </div>
 
