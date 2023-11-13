@@ -43,24 +43,18 @@ public class EditProfileServlet extends HttpServlet {
                 || password.isEmpty()
                 || (! password.equals(passwordConfirmation));
         if (HasErrors) {
-            request.getRequestDispatcher("/WEB-INF/user/EditProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/users/EditProfile.jsp").forward(request, response);
             return;
 
         }
-
-        //Update user
-        DaoFactory.getUsersDao().update(new User(loggedInUser.getId(), username, email, Password.hash(password)));
-        response.sendRedirect("/profile");
 
         //Create a User object with the updated values
         User updatedUser = new User(userId, username, email, password);
 
         //Call the update method to update the user in the database
-        User.update(updatedUser);
-        Object user = DaoFactory.getUsersDao().findByUsername(username);
-        DaoFactory.getUsersDao().edit(user);
+        DaoFactory.getUsersDao().update(updatedUser);
         request.getSession().removeAttribute("user");
-        request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("user", updatedUser);
         response.sendRedirect("/profile");
 
 
