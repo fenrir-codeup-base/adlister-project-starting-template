@@ -1,12 +1,11 @@
 package com.codeup.adlister.dao;
 
-import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Config;
+import com.codeup.adlister.util.Password;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class MySQLUsersDao implements Users {
     private Connection connection;
@@ -70,9 +69,10 @@ public class MySQLUsersDao implements Users {
         String query = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
+            String hashedPw = hashPassword(user.getPassword());
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(3, hashedPw);
             stmt.setLong(4, user.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -96,5 +96,9 @@ public class MySQLUsersDao implements Users {
 
     }
 
-
+    @Override
+    public String hashPassword(String password){
+        String hash = Password.hash(password);
+        return hash;
+    }
 }

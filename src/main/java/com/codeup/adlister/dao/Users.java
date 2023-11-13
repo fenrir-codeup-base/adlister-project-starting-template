@@ -19,4 +19,5 @@ public interface Users {
     void edit(Object user);
 
 
+    String hashPassword(String password);
 }
