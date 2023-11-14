@@ -24,6 +24,9 @@
 
                         <!-- Display logout link -->
                         <li class="nav-item">
+                            <a class="nav-link link-secondary" href="/index.jsp">Home</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link link-secondary" href="/profile">Profile</a>
                         </li>
                         <li class="nav-item">
