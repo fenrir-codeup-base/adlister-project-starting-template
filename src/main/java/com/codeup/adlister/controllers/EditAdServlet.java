@@ -39,19 +39,16 @@ public class EditAdServlet extends HttpServlet {
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve the updated user details from the request parameter
 
-        Ad loggedInAd = (Ad) request.getSession().getAttribute("ad");
-
-        // Retrieve the updated user details from the request parameters
-        long userId = loggedInAd.getId();
-
-
-        Integer id = (Integer) request.getAttribute("id");
+        int id = Integer.parseInt(request.getParameter("id"));
+        int userId = Integer.parseInt(request.getParameter("userid"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
         //Verifies if input has errors and confirms double checks password
-        boolean HasErrors = id.toString().isEmpty()
+        boolean HasErrors = Integer.toString(id).isEmpty()
+                || Integer.toString(userId).isEmpty()
                 || title.isEmpty()
                 || description.isEmpty();
         if (HasErrors) {
@@ -61,12 +58,12 @@ public class EditAdServlet extends HttpServlet {
         }
 
         //Create a User object with the updated values
-        User updatedAd = new User(userId, String.valueOf(id), title, description);
+        Ad updatedAd = new Ad(id, userId, title, description);
 
         //Call the update method to update the user in the database
-        DaoFactory.getUsersDao().update(updatedAd);
-        request.getSession().removeAttribute("user");
-        request.getSession().setAttribute("user", updatedAd);
+        DaoFactory.getAdsDao().update(updatedAd);
+        request.getSession().removeAttribute("ad");
+        request.getSession().setAttribute("ad", updatedAd);
         response.sendRedirect("/profile");
 
 
