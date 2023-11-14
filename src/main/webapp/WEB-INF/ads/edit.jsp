@@ -70,6 +70,7 @@
 <form action="/ads/edit" method="post">
     <div class="form-group">
     <input type="hidden" name="id" value="${ad.id}">
+        <input type="hidden" name="userid" value="${ad.userId}">
     </div>
     <div>
         <label for="title">Title:</label>
