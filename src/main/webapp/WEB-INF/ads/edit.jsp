@@ -67,6 +67,7 @@
 
 <div class="container">
 <h1>Edit Ad</h1>
+    <p>Created By: ${sessionScope.user.username}</p>
 <form action="/ads/edit" method="post">
     <div class="form-group">
     <input type="hidden" name="id" value="${ad.id}">
