@@ -35,7 +35,8 @@
             <label for="password">Password</label>
             <input id="password" name="password" class="form-control" type="password"  required>
         </div>
-        <input type="submit" id="btn" class="btn btn-primary btn-block" value="Log In">
+        <br>
+        <input type="submit" id="btn" class="btn btn-block" value="Log In">
     </form>
 </div>
 </body>

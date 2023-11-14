@@ -71,7 +71,7 @@
     <div class="form-group">
     <input type="hidden" name="id" value="${ad.id}">
         <input type="hidden" name="userid" value="${ad.userId}">
-    </div>
+    </div>-
     <div>
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="${ad.title}">
@@ -80,7 +80,7 @@
         <label for="description">Description:</label>
         <textarea name="description" id="description">${ad.description}</textarea>
     </div>
-    <input type="submit" id="btn" class="btn btn-block btn-primary">
+    <input type="submit" id="btn" class="btn btn-block">
 </form>
 </div>
 </body>
