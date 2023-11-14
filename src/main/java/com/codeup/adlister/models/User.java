@@ -10,7 +10,7 @@ public class User {
 
     private ArrayList<Ad> ads;
 
-    public User() {}
+    public User(Integer id, String title, String description) {}
 
     public User(String username, String email, String password) {
         this.username = username;

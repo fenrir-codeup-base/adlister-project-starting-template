@@ -1,6 +1,10 @@
 package com.codeup.adlister.controllers;
+import com.codeup.adlister.dao.Ads;
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.dao.MySQLAdsDao;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,22 +16,59 @@ import java.io.IOException;
 public class EditAdServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adId = request.getParameter("id");
-        Ad ad = DaoFactory.getAdsDao().findById(Long.parseLong(adId));
-        request.setAttribute("ad", ad);
+    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        System.out.println("request.getParameter(\"id\") = " + request.getParameter("id"));
+        //So I got my ID to here . . how can I use my id to go get the one AD object I want and then pass that forward to my JSP to use in the form?
+
+        long idFromURL = Long.parseLong(request.getParameter("id"));
+        System.out.println("idFromURL = " + idFromURL);
+
+        Ads myDao = DaoFactory.getAdsDao();
+
+        System.out.println("myDao.findById(5) = " + myDao.findById(5).getTitle());
+
+
+        Ad testAd = DaoFactory.getAdsDao().findById(idFromURL);
+        System.out.println("testAd.getId() = " + testAd.getId());
+        System.out.println("testAd.getDescription() = " + testAd.getDescription());
+        System.out.println("testAd.getTitle() = " + testAd.getTitle());
+
+        request.setAttribute("ad", testAd);
+
         request.getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ad = request.getParameter("id");
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Ad loggedInAd = (Ad) request.getSession().getAttribute("ad");
+
+        // Retrieve the updated user details from the request parameters
+        long userId = loggedInAd.getId();
+
+
+        Integer id = (Integer) request.getAttribute("id");
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        Ad ads = DaoFactory.getAdsDao().findById(Long.parseLong(ad));
-        ads.setTitle(title);
-        ads.setDescription(description);
-        DaoFactory.getAdsDao().update(ads);
+        //Verifies if input has errors and confirms double checks password
+        boolean HasErrors = id.toString().isEmpty()
+                || title.isEmpty()
+                || description.isEmpty();
+        if (HasErrors) {
+            request.getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
+            return;
 
+        }
+
+        //Create a User object with the updated values
+        User updatedAd = new User(userId, String.valueOf(id), title, description);
+
+        //Call the update method to update the user in the database
+        DaoFactory.getUsersDao().update(updatedAd);
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", updatedAd);
         response.sendRedirect("/profile");
+
+
     }
 }

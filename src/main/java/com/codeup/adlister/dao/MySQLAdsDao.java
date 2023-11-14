@@ -66,7 +66,21 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Ad findById(long id) {
-        return null;
+        String query = "SELECT * from ads WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+            resultSet.next();
+            return extractAd(resultSet);
+        } catch (SQLException e ) {
+
+            e.printStackTrace();
+            throw new RuntimeException("Did not find by ID");
+
+        }
+
     }
 
     @Override
@@ -116,6 +130,7 @@ public class MySQLAdsDao implements Ads {
 
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+
         return new Ad(
                 rs.getLong("id"),
                 rs.getLong("user_id"),

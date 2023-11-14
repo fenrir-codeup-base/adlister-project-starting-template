@@ -126,8 +126,8 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Edit/Delete</th>
+
             </tr>
             </thead>
             <tbody>
@@ -136,8 +136,15 @@
 <%--                    href link that supposedly takes you to the nonexistent details page of the ad--%>
                     <td><a href="/ads/detail?id=${ad.id}">${ad.title}</a></td>
                     <td>${ad.description}</td>
-                    <td><a href="/WEB-INF/ads/edit.jsp">Edit</a></td>
-                    <td><a href="/WEB-INF/ads/deletead.jsp">Delete</a></td>
+                    <td class="d-flex justify-content-end">
+                    <form method="get" action="ads/edit?id=${ad.id}" class="editAd">
+                        <input type="hidden" name="id" value="${ad.id}">
+                        <input type="submit" class="Btn" value="Edit">
+                    </form>
+                     <form method="post" action="ads/deletead?id=${ad.id}" class="editAd">
+                         <input type="hidden" name="id" value="${ad.id}">
+                        <input type="submit" class="Btn" value="Delete">
+                    </form></td>
                 </tr>
             </c:forEach>
             </tbody>
