@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name="EditServlet", urlPatterns = "/ads/edit")
@@ -40,18 +41,16 @@ public class EditAdServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Ad loggedInAd = (Ad) request.getSession().getAttribute("ad");
+        HttpSession session = request.getSession();
+        Ad loggedInAd = (Ad) session.getAttribute("ad");
 
         // Retrieve the updated user details from the request parameters
-        long userId = loggedInAd.getId();
-
-
-        Integer id = (Integer) request.getAttribute("id");
+        long adId = loggedInAd.getId();
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
         //Verifies if input has errors and confirms double checks password
-        boolean HasErrors = id.toString().isEmpty()
+        boolean HasErrors = adId.isEmpty()
                 || title.isEmpty()
                 || description.isEmpty();
         if (HasErrors) {
@@ -61,7 +60,7 @@ public class EditAdServlet extends HttpServlet {
         }
 
         //Create a User object with the updated values
-        User updatedAd = new User(userId, String.valueOf(id), title, description);
+        User updatedAd = new User(adId, title, description);
 
         //Call the update method to update the user in the database
         DaoFactory.getUsersDao().update(updatedAd);
