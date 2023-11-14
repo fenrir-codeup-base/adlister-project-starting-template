@@ -11,7 +11,10 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
-    <button type="button" class="btn btn-outline-dark">A-Z</button> <button type="button" class="btn btn-outline-dark">Z-A</button>
+    <form action="/ads" method="get">
+        <button name="sort" value ="asc" type="submit" class="btn btn-outline-dark">First Created</button>
+        <button name="sort" value="dsc" type="submit" class="btn btn-outline-dark">Recently Created</button>
+    </form>
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
             <h2>${ad.title}</h2>
