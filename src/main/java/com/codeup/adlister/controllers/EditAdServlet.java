@@ -23,7 +23,7 @@ public class EditAdServlet extends HttpServlet {
         long idFromURL = Long.parseLong(request.getParameter("id"));
         System.out.println("idFromURL = " + idFromURL);
 
-     Ads myDao = DaoFactory.getAdsDao();
+        Ads myDao = DaoFactory.getAdsDao();
 
         System.out.println("myDao.findById(5) = " + myDao.findById(5).getTitle());
 
@@ -34,8 +34,6 @@ public class EditAdServlet extends HttpServlet {
         System.out.println("testAd.getTitle() = " + testAd.getTitle());
 
         request.setAttribute("ad", testAd);
-//        System.out.println("DaoFactory.getAdsDao().findById(idFromURL).getDescription() = " + DaoFactory.getAdsDao().findById(idFromURL).getDescription());
-//        System.out.println("DaoFactory.getAdsDao().findById(id).getTitle() = " + DaoFactory.getAdsDao().findById(idFromURL).getTitle());
 
         request.getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
     }
