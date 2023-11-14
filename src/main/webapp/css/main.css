@@ -29,7 +29,7 @@ video {
     width: 800px;
 }
 .container.hero h1 {
-    font-size: 68px;
+    font-size: 77px;
     font-weight: 400;
     position: relative;
     color: white;
@@ -44,15 +44,15 @@ h1, h3 {
     z-index: 2;
 }
 
-h1 {
-    font-size: 90px;
-}
+/*h1 {*/
+/*    font-size: 100px;*/
+/*}*/
 
 h3 {
-    font-size: 40px;
-    color: #ffffff;
+    font-size: 50px;
+    color: whitesmoke;
 }
 .container.hero p {
     color: white;
-    font-size: 17px;
+    font-size: 30px;
 }

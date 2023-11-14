@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<!--html-->
+<div class="card">
+    <img src="" class="card-img-top" alt="Card image">
+    <div class="card-body">
+        <h5 class="card-title">Card Title</h5>
+        <p class="card-text">Card description.</p>
+        <a href="#" class="btn btn-primary" id="edit-btn">Edit</a>
+        <a href="#" class="btn btn-danger" id="delete-btn">Delete</a>
+    </div>
+</div>
+
+<!--js-->
+<script>
+    const EditAd document.getElementById("edit-btn").addEventListener("click", function() {
+        // show a modal or redirect to an edit page to edit
+    });
+
+    document.getElementById("delete-btn").addEventListener("click", function() {
+        // send a request to delete the card from the server.
+
+    });
+
+    //java controller
+    CardController with class public class CardController {
+        @WebSocket("/card")
+        public String showCardPage() {
+            return "card";
+        }
+    }
+</script>
+</body>
+</html>
