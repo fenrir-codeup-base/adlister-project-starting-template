@@ -12,7 +12,7 @@
 <form action="/deletead" method="POST">
   <h1>Ad Deleted</h1>
   <br>
-  <input type="submit" class="btn btn-primary btn-block" value="Return to Profile">
+  <input type="submit" class="btn btn-block" value="Return to Profile">
 </form>
 </body>
 </html>

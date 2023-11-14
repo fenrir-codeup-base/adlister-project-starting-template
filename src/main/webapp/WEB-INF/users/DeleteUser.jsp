@@ -12,7 +12,7 @@
 <form action="/deleteuser" method="POST">
     <h1>Profile Deleted</h1>
     <br>
-    <input type="submit" class="btn btn-primary btn-block" value="Return to Login">
+    <input type="submit" class="btn btn-block" value="Return to Login">
 </form>
 </body>
 </html>

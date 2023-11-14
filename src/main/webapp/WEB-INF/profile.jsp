@@ -137,14 +137,14 @@
                     <td><a href="/ads/detail?id=${ad.id}">${ad.title}</a></td>
                     <td>${ad.description}</td>
                     <td class="d-flex justify-content-end">
-                    <form method="get" action="ads/edit?id=${ad.id}" class="editAd">
+                    <form method="get" action="ads/edit?id=${ad.id}" class="editAd px-2">
                         <input type="hidden" name="id" value="${ad.id}">
-                        <input type="submit" class="Btn" value="Edit">
+                        <input type="submit" class="btn" value="Edit">
                     </form>
-                     <form method="post" action="ads/deletead?id=${ad.id}" class="editAd">
-                         <input type="hidden" name="id" value="${ad.id}">
-                        <input type="submit" class="Btn" value="Delete">
-                    </form></td>
+                    <form method="post" action="ads/deletead?id=${ad.id}" class="deleteAd px-2">
+                        <input type="hidden" name="id" value="${ad.id}">
+                        <input type="submit" class="btn" value="Delete">
+                    </form>
                 </tr>
             </c:forEach>
             </tbody>
@@ -162,14 +162,14 @@
                 <h4>Click to Edit Account</h4>
                 <form method="get" action="/editprofile" class="editForm">
                     <input type="hidden" name="userId" value="${sessionScope.user.id}">
-                    <input type="submit" class="Btn" value="Edit">
+                    <input type="submit" class="btn" value="Edit">
                 </form>
 
         <!-- Delete button -->
         <h4>Click to Delete Account</h4>
         <form method="post" action="/deleteuser" class="editForm">
             <input type="hidden" name="userId" value="${sessionScope.user.id}">
-            <input type="submit" class="Btn" value="Delete">
+            <input type="submit" class="btn" value="Delete">
         </form>
 
 <%--        ad cards--%>
